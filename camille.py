@@ -7,11 +7,6 @@ from InfoModel import InfoModel
 
 
 def frida_hook(app_name, func, wait_time=0):
-    """
-    :param wait_time: 延迟hook，避免加壳
-    :param app_name: 包名
-    :return:
-    """
     # 消息处理
     def my_message_handler(message, payload):
         if message["type"] == "error":

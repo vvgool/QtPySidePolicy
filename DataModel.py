@@ -21,6 +21,20 @@ class DataModel(QObject):
     def __init__(self, parent=None):
         QObject.__init__(self, parent)
 
+    def reset(self):
+        self.actions = {}
+        self.names = {}
+        self.nameIndex = -1
+        self.actionIndex = -1
+        self.dataIndex = -1
+        self.actionList = []
+        self.dataList = []
+
+        self.currentName = ""
+        self.currentAction = ""
+        self.currentData = None
+        self.currentMsg = ""
+
     def setRepo(self, data):
         if data.action not in self.actions.keys():
             self.actions[data.action] = [data]
@@ -97,7 +111,7 @@ class DataModel(QObject):
     def getMsgContent(self, info):
         content = "------------------------------start--------------------------------- \n"
         content += "[*] {0}，APP行为：{1}，行为描述：{2} \n".format(time.strftime("%Y-%m-%d %H:%M:%S",
-                                                                        time.localtime(info.time)), info.action, info.msg)
+                                                                        time.localtime(info.time/1000)), info.action, info.msg)
         content += "[*] 调用堆栈：\n"
         content += info.stacks
         content += "-------------------------------end----------------------------------"

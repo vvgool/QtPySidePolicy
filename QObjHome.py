@@ -21,6 +21,8 @@ class QObjHome(QObject):
         QObject.__init__(self, parent)
 
     def startLaunch(self, path, pkg):
+        self.data.reset()
+        self.hookSignal.emit()
         if not os.path.exists(path):
             os.makedirs(path)
         self.logStream = open(path + "/" + pkg + ".txt", mode="w+")
@@ -97,7 +99,7 @@ class QObjHome(QObject):
         self.logFile(
             "------------------------------start---------------------------------")
         self.logFile("[*] {0}，APP行为：{1}，行为描述：{2}".format(time.strftime("%Y-%m-%d %H:%M:%S",
-                                                                       time.localtime(info.time)), info.action, info.msg))
+                                                                       time.localtime(info.time/1000)), info.action, info.msg))
         self.logFile("[*] 调用堆栈：")
         self.logFile(info.stacks)
         self.logFile(
