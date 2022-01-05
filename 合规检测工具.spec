@@ -4,10 +4,10 @@
 block_cipher = None
 
 
-a = Analysis(['main.py'],
+a = Analysis(['QObjHome.py', 'InfoModel.py', 'camille.py', 'DataModel.py', 'main.py'],
              pathex=[],
              binaries=[],
-             datas=[('main.qml', '.'), ('QObjHome.py', '.'), ('camille.py', '.'), ('script.js', '.'), ('InfoModel.py', '.'), ('DataModel.py', '.--onefile')],
+             datas=[('main.qml', '.'), ('script.js', '.'), ('check_logo.png', '.')],
              hiddenimports=[],
              hookspath=[],
              hooksconfig={},
@@ -33,7 +33,7 @@ exe = EXE(pyz,
           disable_windowed_traceback=False,
           target_arch=None,
           codesign_identity=None,
-          entitlements_file=None )
+          entitlements_file=None , icon='check_logo.png')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
@@ -44,5 +44,5 @@ coll = COLLECT(exe,
                name='合规检测工具')
 app = BUNDLE(coll,
              name='合规检测工具.app',
-             icon=None,
+             icon='check_logo.png',
              bundle_identifier=None)
