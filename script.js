@@ -88,6 +88,12 @@ function getPhoneState() {
         return temp;
     }
 
+    TelephonyManager.getTelephonyProperty.overload('int', 'java.lang.String', 'java.lang.String').implementation = function(p, p1, p2) {
+        var temp = this.getTelephonyProperty(p, p1, p2);
+        alertSend("Phone", "获取运营商" , "getTelephonyProperty参数为：" + p + " " + p2 + " " + p3);
+        return temp;
+    }
+
 }
 
 // 获取系统属性（记录关键的）
@@ -264,6 +270,12 @@ function getPackageManager() {
         alertSend("AppInfo", "getRunningAppProcesses", "获取了正在运行的App");
         return temp;
     };
+
+    ActivityManager.getRunningTasks.implementation = function(p) {
+        var temp = this.getRunningTasks(p);
+        alertSend("AppInfo", "getRunningTasks", "获取了正在运行的App 参数： " + p);
+        return temp;
+    }
 }
 
 // 获取位置信息
@@ -465,6 +477,15 @@ function getClipboradInfo() {
     }
 }
 
+function getSensorInfo() {
+    var SensorManager = Java.use("android.hardware.SensorManager");
+    SensorManager.getSensorList.implementation = function(type) {
+        var temp = this.getSensorList(type);
+        alertSend("传感器", "getSensorList", "获取传感器 type: " + type + " result = " + temp.toString());
+        return temp;
+    }
+}
+
 function main() {
     Java.perform(function () {
         console.log("合规检测敏感接口开始监控...");
@@ -480,6 +501,7 @@ function main() {
         getNetwork();
         getBluetooth();
         getClipboradInfo();
+        getSensorInfo();
     });
 }
 
