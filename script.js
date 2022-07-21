@@ -90,7 +90,7 @@ function getPhoneState() {
 
     TelephonyManager.getTelephonyProperty.overload('int', 'java.lang.String', 'java.lang.String').implementation = function(p, p1, p2) {
         var temp = this.getTelephonyProperty(p, p1, p2);
-        alertSend("Phone", "获取运营商" , "getTelephonyProperty参数为：" + p + " " + p2 + " " + p3);
+        alertSend("Phone", "获取运营商" , "getTelephonyProperty参数为：" + p + " " + p1 + " " + p2);
         return temp;
     }
 
